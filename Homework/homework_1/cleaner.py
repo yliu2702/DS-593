@@ -60,6 +60,19 @@ for col, correction in corrections.items():
     if col in df.columns:
         df[col] = df[col].replace(correction)
 
+# Cleaned Statistics (after cleaning)
+print("\nCleaned Statistics:")
+
+# 1. Number of missing cells by column after cleaning
+cleaned_missing_cells = df.isnull().sum()
+print("\nNumber of missing cells by column (Cleaned):")
+print(cleaned_missing_cells)
+
+# 2. Number of categories in each specified column after cleaning
+cleaned_categories_count = {col: df[col].nunique() for col in category_columns if col in df.columns}
+print("\nNumber of categories in each column (Cleaned):")
+print(cleaned_categories_count)
+
 # Save the cleaned data back into a new table in the SQLite database named 'cleaned_data'
 df.to_sql('cleaned_data', connection, if_exists='replace', index=False)
 
