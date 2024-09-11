@@ -10,7 +10,7 @@ conn = sqlite3.connect(database_file)
 print("Connect DB successfully!")
 
 # Load the data into a pandas DataFrame
-df = pd.read_sql_query("SELECT * FROM events", conn)
+df = pd.read_sql_query("SELECT * FROM health_events", conn)
 
 # 1. Number of missing cells by column
 missing_cells = df.isnull().sum()
