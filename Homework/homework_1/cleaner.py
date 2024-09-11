@@ -59,6 +59,8 @@ corrections = {
 for col, correction in corrections.items():
     if col in df.columns:
         df[col] = df[col].replace(correction)
+print("Clean steps completed!")
+
 
 # Cleaned Statistics (after cleaning)
 print("\nCleaned Statistics:")
