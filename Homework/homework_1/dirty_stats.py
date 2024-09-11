@@ -7,6 +7,7 @@ database_file = 'health_events_data.db'
 
 # Connect to the SQLite database
 conn = sqlite3.connect(database_file)
+print("Connect DB successfully!")
 
 # Load the data into a pandas DataFrame
 df = pd.read_sql_query("SELECT * FROM events", conn)
