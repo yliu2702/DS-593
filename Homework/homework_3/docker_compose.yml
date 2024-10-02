@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  unmodified_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: mydb_1
+    # no ports, since unaccessible from outside the system 
+    volumes:
+      - postgres_data_1:/var/lib/postgresql/data
+  
+  avg_usage_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: mydb_2
+    # must be exposed on the standard PostgreSQL port 
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_2:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - unmodified_db
+      - avg_usage_db
+    # ports:
+    #   - "5000:5000"
+    # environment:
+    #   DATABASE_URL: postgresql://admin:password@unmodified_db:5432/mydb_1
+    #   DATABASE_URL_2: postgresql://admin:password@avg_usage_db:5432/mydb_2
+
+volumes:
+  postgres_data_1:
+  postgres_data_2:
+  # pgadmin_data:
+  # notebooks:
+
