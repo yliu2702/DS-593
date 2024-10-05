@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    # username, password, and database name
+    environment:
+      POSTGRES_USER : admin
+      POSTGRES_PASSWORD : password
+      POSTGRES_DB: mydb
+
+    # posegres/ sql default port
+    ports:
+      - "5432:5432"
+    volumes:
+      - posegres_data:/var/lib/postgresql/data
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    volumes: 
+      - pgadmin_data:/var/lib/pgadmin
+  
+  # jupyter:
+  #   image: jupyter/datascience-notebook
+  #   volumes:
+  #     - notebooks:/home/jovyan/work
+  #   ports:
+  #     - "8888:8888"
+  #   environment:
+  #     JUPYTER_ENABLE_LAB: yes
+
+  # app:
+  #   build: .
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - dim
+  #   volumes: 
+  #     - ./:/postgres_python
+
+volumes:
+  posegres_data:
+  pgadmin_data:
+  notebooks:

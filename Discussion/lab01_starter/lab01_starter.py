@@ -88,5 +88,9 @@ import pandas as pd
 import sqlite3
 df = pd.DataFrame.from_dict({'countryname': countries, 'population':populations})
 conn = sqlite3.connect('somedatabase.db')
+<<<<<<< HEAD
+df.to_sql('populations', conn, if_exists='replace')
+=======
 df.to_sql('populations', conn, if_exists='replace')
 
+>>>>>>> 71ed72cf2a7063ef6673808104bd908760320141

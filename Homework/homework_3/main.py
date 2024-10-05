@@ -52,12 +52,14 @@ avg_ridership_with_rainfall.to_csv(save_folder + "/avg_ridership_with_rainfall.c
 def get_engine(url):
     while True:
         try:
-            engine = create_engine(url)            
+            engine = create_engine(url) 
+            print("Engine created")           
             with engine.connect() as conn:
                 return engine
         except Exception as e:
             print("Error while connecting: ", e)
             time.sleep(3)
+
 
 def save_POSTGRESQL(url, data, table_name):
     # SAVE DATA TO POSTGRESQL
